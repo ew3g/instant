@@ -2,57 +2,58 @@
 
 #collector for images to post on instagram
 
-import config
+import config2
 import os
 import requests
-from pypexels import PyPexels
+from pypexelapi import PyPexelApi
 from PIL import Image
 from resizeimage import resizeimage
-import ConfigParser
+import configparser
 import time
 
-photo_url = None
-photo_photographer_name = None
-photo_photographer_url = None
-photo_id = None
+def mysleep(start, end, increment):
+  for i in xrange(start, end, increment):
+    time.sleep(1)
+    print i
 
+while True:
 
-pypexels = PyPexels(
-  api_key=config.CONFIG['pypexels_api_key']
-)
+  pypexel_api = PyPexelApi(config2.CONFIG['pypexels_api_key'])
 
-random_photo = pypexels.random(per_page=1)
-for photo in random_photo.entries: 
-  photo_url = str(photo.src['large'])
-  photo_photographer_name = str(photo.photographer)
-  photo_photographer_url = str(photo.photographer_url)
-  photo_id = str(photo.id)
+  random_photo = pypexel_api.get_single_random_photo()
+  
+  r = requests.get(random_photo.photo_url)
+  filename = random_photo.photo_id + '.jpg'
+  path = 'img_post/' + filename
+  f = open(path, 'wb')
+  f.write(r.content)
+  f.close()
 
-r = requests.get(photo_url)
-path = 'img_post/' + photo_id + '.jpg'
-f = open(path, 'wb')
-f.write(r.content)
-f.close()
+  config = configparser.ConfigParser()
+  config.read('data_img.cfg')
 
-
-config_parser = ConfigParser.RawConfigParser()
-
-with open(path, 'r+b') as f:
+  with open(path, 'r+b') as f:
     with Image.open(f) as image:
         cover = resizeimage.resize_cover(
           image, 
           [
-            config.CONFIG['instagram_ratio_photo'],
-            config.CONFIG['instagram_ratio_photo']
+            config2.CONFIG['instagram_ratio_photo'],
+            config2.CONFIG['instagram_ratio_photo']
           ]
         )
         os.remove(path)
         cover.save(path, image.format)        
-        config_parser.add_section(path)
-        config_parser.set(path, 'photo_url', photo_url)
-        config_parser.set(path, 'photo_photographer_name', photo_photographer_name)
-        config_parser.set(path, 'photo_photographer_url', photo_photographer_url)
-        config_parser.set(path, 'photo_id', photo_id)
+        config.remove_section(filename)
+        config.add_section(filename)
+        config.set(filename, 'photo_url', random_photo.photo_url)
+        config.set(filename, 'photo_photographer_name', random_photo.photographer_name)
+        config.set(filename, 'photo_photographer_url', random_photo.photographer_url)
+        config.set(filename, 'photo_id', random_photo.photo_id)
 
-        with open('img_post/data_img.cfg', 'a+') as config_file:
-          config_parser.write(config_file)
+        with open('data_img.cfg', 'w') as config_file:
+          config.write(config_file)
+  
+  
+  print('Imagem adicionada a biblioteca: %s' %(filename))
+  mysleep(10,0,-1)
+  #time.sleep(10)
