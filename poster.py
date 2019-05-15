@@ -37,7 +37,10 @@ while True:
   config.read('data_img.cfg')
   if img is not None:
     if config.has_section(img):
-      photo = parse_config_to_photo(img, config)  
+      try:
+        photo = parse_config_to_photo(img, config)  
+      except:
+        photo = None
       if photo is not None:
         cap = ''
         for tag in random.sample(popular_tags, 5):
@@ -58,6 +61,12 @@ while True:
           config.remove_section(img)
           with open('data_img.cfg', 'w') as config_file:
             config.write(config_file)        
+      else:
+        print img
+        #os.remove(img)
+        #config.remove_section(img)
+        #with open('data_img.cfg', 'w') as config_file:
+          #config.write(config_file)        
     else:
       os.remove(photo_path)
   else:
