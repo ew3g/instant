@@ -1,3 +1,5 @@
 config2.py
 test.py
 *.pyc
+.vscode/*
+ig.json

@@ -51,7 +51,7 @@ while True:
         login = config2.CONFIG['instagram_login']
         password = config2.CONFIG['instagram_password']
 
-        with client('edilson.w3g@gmail.com', 'policia24horas') as cli:
+        with client(login, password) as cli:
           
           cli.upload(photo_path, caption=cap)
           os.remove(photo_path)
