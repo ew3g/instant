@@ -1,3 +1,4 @@
 config2.py
-instantEnv/
+.vscode/*
+instantEnv/*
 *.pyc
