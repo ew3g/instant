@@ -1,6 +1,2 @@
 config2.py
-.vscode/*
-instantEnv/*
-*.pyc
-ig.json
 test.py
