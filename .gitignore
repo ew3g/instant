@@ -1,4 +1,3 @@
 config2.py
-instantEnv
-img_post/*
+instantEnv/
 *.pyc
