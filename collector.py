@@ -55,5 +55,5 @@ while True:
   
   
   print('Imagem adicionada a biblioteca: %s' %(filename))
-  mysleep(10,0,-1)
+  mysleep(3600,0,-1)
   #time.sleep(10)

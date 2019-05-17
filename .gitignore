@@ -3,3 +3,5 @@ test.py
 *.pyc
 .vscode/*
 ig.json
+img_post/*.jpg
+instantEnv/*

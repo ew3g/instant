@@ -9,6 +9,12 @@ import config2
 from instapy_cli import client
 import os
 import time
+import random
+
+def mysleep(start, end, increment):
+  for i in xrange(start, end, increment):
+    time.sleep(1)
+    print i
 
 def parse_config_to_photo(session,config):
   photo = None
@@ -23,7 +29,11 @@ def parse_config_to_photo(session,config):
   
 
 library = []
-popular_tags = ['#instagood', '#photooftheday', '#beautiful', '#happy', '#picoftheday', '#instadaily', '#style', '#instalike', '#life', '#beauty', '#amazing', '#photography', '#photo', '#cool', '#instapic', '#inspiration', '#instacool', '#blessed', '#happiness', '#awesome', '#nice', '#love']
+popular_tags = [
+  '#instagood', '#photooftheday', '#beautiful', '#happy', '#picoftheday', 
+  '#instadaily', '#style', '#instalike', '#life', '#beauty', '#amazing', 
+  '#photography', '#photo', '#cool', '#instapic', '#inspiration', '#instacool', 
+  '#blessed', '#happiness', '#awesome', '#nice', '#love', '#instamood']
 
 while True:
   try:
@@ -55,21 +65,29 @@ while True:
         password = config2.CONFIG['instagram_password']
 
         with client(login, password) as cli:
-          
+          print('uploading')
           cli.upload(photo_path, caption=cap)
+          print('done')
           os.remove(photo_path)
           config.remove_section(img)
           with open('data_img.cfg', 'w') as config_file:
             config.write(config_file)        
-      else:
-        print img
-        #os.remove(img)
-        #config.remove_section(img)
-        #with open('data_img.cfg', 'w') as config_file:
-          #config.write(config_file)        
+      else:        
+        try:
+          os.remove(img)          
+        except:
+          print('img not found to be deleted, keep going')
+        config.remove_section(img)
+        with open('data_img.cfg', 'w') as config_file:
+          config.write(config_file)        
     else:
+      photo_path = 'img_post/' + img
       os.remove(photo_path)
+      config.remove_section(img)
+      with open('data_img.cfg', 'w') as config_file:
+        config.write(config_file)        
   else:
     print 'Não há fotos na biblioteca'
   
-  time.sleep(3600)
+  mysleep(random.randint(2,10) * 3600, 0, -1) 
+  
