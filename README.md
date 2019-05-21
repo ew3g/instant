@@ -18,9 +18,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
--It is recommended to create a virtualenv to run the application
--simply pip install requeriments.txt
--create a file named config2.py like the file config.py and insert your credentials there
+-It is recommended to create a virtualenv to run the application  
+-simply pip install requeriments.txt  
+-create a file named config2.py like the file config.py and insert your credentials there  
 
 
 ## Deployment
