@@ -9,17 +9,22 @@ class InstantApi:
       config2.CONFIG['instagram_password']
     )
 
-    api.login()
-    user_id = api.username_id
     followers = []
-    next_max_id = True
-    while next_max_id:
-      if next_max_id is True:
-        next_max_id = ''
+    try:
+      api.login()
+      user_id = api.username_id
       
-      _ = api.getUserFollowers(user_id, maxid = next_max_id)
-      followers.extend(api.LastJson.get('users',[]))
-      next_max_id = api.LastJson.get('next_max_id', '')
+      next_max_id = True
+      while next_max_id:
+        if next_max_id is True:
+          next_max_id = ''
+        
+        _ = api.getUserFollowers(user_id, maxid = next_max_id)
+        followers.extend(api.LastJson.get('users',[]))
+        next_max_id = api.LastJson.get('next_max_id', '')
+    except Exception as e:
+      print('erro: ' + str(e))
+    
     return followers
 
   @staticmethod
@@ -28,19 +33,22 @@ class InstantApi:
       config2.CONFIG['instagram_login'],
       config2.CONFIG['instagram_password']
     )
-
-    api.login()
-    user_id = api.username_id
     following = []
-    next_max_id = True
-    while next_max_id:
-        print next_max_id
-        # first iteration hack
-        if next_max_id is True:
-            next_max_id = ''
-        _ = api.getUserFollowings(user_id, maxid=next_max_id)
-        following.extend(api.LastJson.get('users', []))
-    next_max_id = api.LastJson.get('next_max_id', '')
+    try:
+      api.login()    
+      user_id = api.username_id
+      
+      next_max_id = True
+      while next_max_id:
+          print next_max_id
+          # first iteration hack
+          if next_max_id is True:
+              next_max_id = ''
+          _ = api.getUserFollowings(user_id, maxid=next_max_id)
+          following.extend(api.LastJson.get('users', []))
+      next_max_id = api.LastJson.get('next_max_id', '')
+    except Exception as e:
+      print('erro: ' + str(e))
     return following
 
   @staticmethod

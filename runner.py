@@ -14,8 +14,8 @@ interval_run_collector = 1
 next_run_follower = 0
 interval_run_follower = 1
 
-next_run_unfollower = 0
-interval_run_unfollower = 1
+# next_run_unfollower = 0
+# interval_run_unfollower = 5
 
 next_run_poster = 0
 interval_run_poster = 1
@@ -41,16 +41,7 @@ while True:
     follower.run()
     next_run_follower = (Utils.current_time_milliseconds() + (interval_run_follower * 3600000))
     print('Finalizado. Próxima execução: ' + str(datetime.datetime.fromtimestamp(next_run_follower / 1000.0)))
-    print('**********************')
-
-  if(now >= next_run_unfollower):
-    print('\n\n\n******************')
-    print('Executando o unfollower')
-    unfollower = Unfollower()
-    unfollower.run()
-    next_run_unfollower = (Utils.current_time_milliseconds() + (interval_run_unfollower * 3600000))
-    print('Finalizado. Próxima execução: ' + str(datetime.datetime.fromtimestamp(next_run_unfollower / 1000.0)))
-    print('**********************')
+    print('**********************')  
 
   if(now >= next_run_poster):
     print('\n\n\n******************')

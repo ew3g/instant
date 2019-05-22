@@ -19,7 +19,11 @@ class Poster:
       '#instagood', '#photooftheday', '#beautiful', '#happy', '#picoftheday', 
       '#instadaily', '#style', '#instalike', '#life', '#beauty', '#amazing', 
       '#photography', '#photo', '#cool', '#instapic', '#inspiration', '#instacool', 
-      '#blessed', '#happiness', '#awesome', '#nice', '#love', '#instamood']
+      '#blessed', '#happiness', '#awesome', '#nice', '#love', '#instamood',
+      '#art', '#fun', '#pretty', '#motivation', '#lifestyle', '#hot', '#sweet',
+      '#instalove', '#photographer', '#relax', '#loveit', '#picture', '#instaphoto',
+      '#best', '#amor', '#insta', '#pic', '#adorable', '#lovely', '#instamoment',
+      '#mood', '#natural', '#inlove']
 
     try:
       img = os.listdir('img_post')[0]
