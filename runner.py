@@ -18,7 +18,7 @@ interval_run_follower = 1
 # interval_run_unfollower = 5
 
 next_run_poster = 0
-interval_run_poster = 1
+interval_run_poster = 6
 
 
 
@@ -26,7 +26,7 @@ while True:
   now = Utils.current_time_milliseconds()
 
   if(now >= next_run_collector):
-    print('\n\n\n******************')
+    print('\n\n\n**********************')
     print('Executando o coletor')
     collector = Collector()
     collector.run()
@@ -35,7 +35,7 @@ while True:
     print('**********************')
 
   if(now >= next_run_follower):
-    print('\n\n\n******************')
+    print('\n\n\n**********************')
     print('Executando o follower')
     follower = Follower()
     follower.run()
@@ -44,7 +44,7 @@ while True:
     print('**********************')  
 
   if(now >= next_run_poster):
-    print('\n\n\n******************')
+    print('\n\n\n**********************')
     print('Executando o poster')
     poster = Poster()
     poster.run()
