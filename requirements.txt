@@ -43,7 +43,7 @@ pypexels==1.0.0b3
 pyrsistent==0.15.2
 python-resize-image==1.1.18
 PyVirtualDisplay==0.2.1
-PyYAML==5.1
+PyYAML==5.4
 query-string==2019.4.13
 regex==2019.4.14
 request==2019.4.13
